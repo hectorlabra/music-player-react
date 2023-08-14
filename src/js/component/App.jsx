@@ -1,6 +1,6 @@
 import React from 'react';
-import Player from './js/component/Player';
-import './styles/index.css';
+import Player from './Player';
+
 
 const App = () => {
   return (

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, ListGroup } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/bootstrap.min.css';
+
 
 const Player = () => {
   const audioRef = useRef(null);
