@@ -52,13 +52,13 @@ const Player = () => {
 
   return (
     <div className="player-container">
-      <div className="songs-list">
+      <div className="songs-list text-center">
         <h2>Lista de Canciones</h2>
         <ListGroup>
           {songs.map((song, index) => (
             <ListGroup.Item
               key={index}
-              className="bg-dark border-0 text-white"
+              className={`border-0 text-white ${currentSongIndex === index ? 'bg-secondary' : 'bg-dark'}`}
               onClick={() => playSong(song.url, index)}
             >
               {song.name}
@@ -68,14 +68,14 @@ const Player = () => {
       </div>
       <audio ref={audioRef} />
 
-      <div className="controls">
-        <Button variant="light" className="control-button" onClick={playPreviousSong}>
+      <div className="controls text-center bg-black p-4 fixed-bottom">
+        <Button variant="light" className="control-button mx-2" onClick={playPreviousSong}>
           <FaStepBackward />
         </Button>
-        <Button variant="light" className="control-button" onClick={togglePlayPause}>
+        <Button variant="light" className="control-button mx-2" onClick={togglePlayPause}>
           {isPlaying ? <FaPause /> : <FaPlay />}
         </Button>
-        <Button variant="light" className="control-button" onClick={playNextSong}>
+        <Button variant="light" className="control-button mx-2" onClick={playNextSong}>
           <FaStepForward />
         </Button>
       </div>
