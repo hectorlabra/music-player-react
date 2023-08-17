@@ -1,54 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Button, ListGroup } from 'react-bootstrap';
-
+import { FaStepBackward, FaPlay, FaStepForward } from 'react-icons/fa';
 
 const Player = () => {
-  const audioRef = useRef(null);
-  const [songs, setSongs] = useState([]);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
-
-  useEffect(() => {
-    fetch('http://assets.breatheco.de/apis/sound/songs')
-      .then(response => response.json())
-      .then(data => setSongs(data))
-      .catch(error => console.error('Error fetching songs:', error));
-  }, []);
-
-  const playSong = (index) => {
-    if (audioRef.current) {
-      audioRef.current.src = songs[index].url;
-      audioRef.current.play();
-      setCurrentSongIndex(index);
-    }
-  };
-
-  const playNextSong = () => {
-    let nextIndex = (currentSongIndex + 1) % songs.length;
-    playSong(nextIndex);
-  };
-
-  const playPreviousSong = () => {
-    let previousIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-    playSong(previousIndex);
-  };
-
   return (
-    <div className="player-container">
-      <div className="songs-list">
+    <div className="player-container bg-dark text-white p-3">
+      <div className="songs-list text-center mb-4">
+        <h2 className="mb-5">Lista de Canciones</h2>
         <ListGroup>
-          {songs.map((song, index) => (
-            <ListGroup.Item key={index} action onClick={() => playSong(index)}>
-              {song.name}
-            </ListGroup.Item>
-          ))}
+          <ListGroup.Item className="bg-dark border-0 text-white">Nombre canción 1</ListGroup.Item>
+          <div className="divider bg-secondary my-2"></div>
+          <ListGroup.Item className="bg-dark border-0 text-white">Nombre canción 2</ListGroup.Item>
+          <div className="divider bg-secondary my-2"></div>
+          {/* Agregar más elementos de la lista aquí */}
         </ListGroup>
       </div>
-      <audio ref={audioRef} controls />
-      <div className="controls">
-        <Button variant="secondary" onClick={playPreviousSong}>Anterior</Button>
-        <Button variant="primary" onClick={() => audioRef.current?.pause()}>Pausa</Button>
-        <Button variant="primary" onClick={() => audioRef.current?.play()}>Reproducir</Button>
-        <Button variant="secondary" onClick={playNextSong}>Siguiente</Button>
+      <div className="divider bg-secondary mb-4"></div>
+      <div className="controls fixed-bottom d-flex justify-content-center p-3 bg-dark">
+        <Button variant="light" className="control-button">
+          <FaStepBackward /> {/* Icono de retroceder */}
+        </Button>
+        <Button variant="light" className="control-button mx-3">
+          <FaPlay /> {/* Icono de play */}
+        </Button>
+        <Button variant="light" className="control-button">
+          <FaStepForward /> {/* Icono de avanzar */}
+        </Button>
       </div>
     </div>
   );
